@@ -13,7 +13,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $AllHome = \App\Models\Home::all();
+        return view('home.index', compact('AllHome'));
     }
 
     /**
@@ -38,7 +39,7 @@ class HomeController extends Controller
                 ->store('homes', 'public');
         }
         \App\Models\Home::create($data);
-        return redirect()->route('home.index');
+        return redirect()->route('home.index')->with('success', "YOUR post is added successfully");
     }
 
     /**
@@ -74,6 +75,6 @@ class HomeController extends Controller
     {
         $home->delete();
         $this->authorize('delete', $home);
-        return redirect()->route('home.index');
+        return redirect()->route('home.index')->with('success', "your post about HOME is deleted");
     }
 }
