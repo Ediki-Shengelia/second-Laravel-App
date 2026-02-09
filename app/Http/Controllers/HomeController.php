@@ -12,7 +12,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        return view('home.index');
     }
 
     /**
@@ -20,7 +20,9 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        $owner = \App\Models\Home::$owner;
+        $types = Home::$type;
+        return view('home.create', compact('owner', 'types'));
     }
 
     /**
@@ -37,6 +39,7 @@ class HomeController extends Controller
     public function show(Home $home)
     {
         $this->authorize('view', $home);
+        return view('home.show');
     }
 
     /**
@@ -45,6 +48,7 @@ class HomeController extends Controller
     public function edit(Home $home)
     {
         $this->authorize('update', $home);
+        return view('home.edit');
     }
 
     /**
@@ -60,6 +64,8 @@ class HomeController extends Controller
      */
     public function destroy(Home $home)
     {
+        $home->delete();
         $this->authorize('delete', $home);
+        return redirect()->route('home.index');
     }
 }

@@ -18,4 +18,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/user.photo', [ProfileController::class, 'photo_upload_of_user'])->name('user.photo.upload');
 });
 
+Route::resource('home', \App\Http\Controllers\HomeController::class);
 require __DIR__ . '/auth.php';
