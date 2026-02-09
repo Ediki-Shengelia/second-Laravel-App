@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -56,5 +57,18 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function photo_upload_of_user(Request $request)
+    {
+        $path = $request->file('user_photo')->store('user', 'public');
+        $user = auth()->user();
+        if ($user->photo && Storage::disk('public')->exists($user->photo)) {
+            Storage::disk('public')->delete($user->photo);
+        }
+        $user->update([
+            'photo' => $path,
+        ]);
+        return back()->with('success', "Photo Uploaded Successfully");
     }
 }
