@@ -48,7 +48,7 @@ class HomeController extends Controller
     public function show(Home $home)
     {
         $this->authorize('view', $home);
-        return view('home.show');
+        return view('home.show', compact('home'));
     }
 
     /**
