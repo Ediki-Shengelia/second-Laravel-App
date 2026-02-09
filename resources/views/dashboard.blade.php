@@ -23,4 +23,5 @@
             </div>
         </div>
     </div>
+    <a href="{{route('home.index')}}">Home page</a>
 </x-app-layout>

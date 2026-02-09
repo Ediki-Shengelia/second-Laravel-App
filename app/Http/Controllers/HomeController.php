@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreHomeRequest;
 use App\Models\Home;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,16 @@ class HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreHomeRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        if ($request->hasFile('home_image')) {
+            $data['home_image'] = $request->file('home_image')
+                ->store('homes', 'public');
+        }
+        \App\Models\Home::create($data);
+        return redirect()->route('home.index');
     }
 
     /**
