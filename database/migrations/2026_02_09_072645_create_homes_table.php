@@ -20,6 +20,9 @@ return new class extends Migration
             $table->enum('owner', \App\Models\Home::$owner);
             $table->unsignedSmallInteger('area');
             $table->string('home_image');
+            $table->foreignIdFor(\App\Models\User::class)
+                ->constrained()
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

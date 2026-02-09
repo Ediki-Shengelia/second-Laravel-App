@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Home;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,32 +34,32 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Home $home)
     {
-        //
+        $this->authorize('view', $home);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Home $home)
     {
-        //
+        $this->authorize('update', $home);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Home $home)
     {
-        //
+        $this->authorize('update', $home);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Home $home)
     {
-        //
+        $this->authorize('delete', $home);
     }
 }

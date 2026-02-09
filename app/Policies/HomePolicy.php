@@ -21,7 +21,7 @@ class HomePolicy
      */
     public function view(User $user, Home $home): bool
     {
-        return false;
+        return $user->id === $home->user_id;
     }
 
     /**
@@ -37,7 +37,7 @@ class HomePolicy
      */
     public function update(User $user, Home $home): bool
     {
-        return false;
+        return $user->id === $home->user_id;;
     }
 
     /**
@@ -45,7 +45,7 @@ class HomePolicy
      */
     public function delete(User $user, Home $home): bool
     {
-        return false;
+        return $user->id === $home->user_id;
     }
 
     /**
