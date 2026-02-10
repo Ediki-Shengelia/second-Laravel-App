@@ -10,6 +10,7 @@
                     <img class="object-fit w-20 h-20" src="{{ Storage::url($home->home_image) }}" alt="">
                     <h2 class="text-2xl">{{ number_format($home->price) }}$</h2>
                     <h3 class="text-2xl">{{ $home->location }}</h3>
+                    <p>{{$home->area}} m2</p>
                     <p class="text-sm">{{ $home->created_at->diffForHumans() }}</p>
                 </div>
             </a>

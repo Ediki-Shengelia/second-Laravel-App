@@ -8,5 +8,5 @@ class Home extends Model
 {
     public static array $type = ['Flat', 'Home', 'Apartment'];
     public static array $owner = ['Owner', 'Broker'];
-    protected $fillable = ['location', 'price', 'type', 'phone_number', 'owner', 'area', 'home_image', 'user_id'];
+    protected $fillable = ['location', 'price', 'type', 'phone_number', 'owner', 'area', 'unique_id', 'description', 'home_image', 'user_id'];
 }

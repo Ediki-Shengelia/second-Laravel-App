@@ -23,12 +23,13 @@ class StoreHomeRequest extends FormRequest
     {
         return [
             'location' => 'required|min:5|max:255',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:5000',
             'type' => 'required|string',
             'phone_number' => 'required|string|min:9|max:20',
             'owner' => 'required|string',
-            'area' => 'required|numeric|min:1',
+            'area' => 'required|numeric|min:25',
             'home_image' => 'required|image|mimes:jpg,jpeg,png,',
+            'description' => 'nullable|min:20'
         ];
     }
 }

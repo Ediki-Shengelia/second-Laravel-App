@@ -34,6 +34,7 @@ class HomeController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = auth()->id();
+        $data['unique_id'] = now()->timestamp . random_int(100, 999);
         if ($request->hasFile('home_image')) {
             $data['home_image'] = $request->file('home_image')
                 ->store('homes', 'public');
@@ -47,6 +48,7 @@ class HomeController extends Controller
      */
     public function show(Home $home)
     {
+
         $this->authorize('view', $home);
         return view('home.show', compact('home'));
     }
