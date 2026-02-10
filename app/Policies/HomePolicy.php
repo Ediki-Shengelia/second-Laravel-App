@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\Home;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+
 
 class HomePolicy
 {
@@ -13,15 +13,15 @@ class HomePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Home $home): bool
+    public function view(?User $user, Home $home): bool
     {
-        return $user->id === $home->user_id;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class HomePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class HomePolicy
      */
     public function update(User $user, Home $home): bool
     {
-        return $user->id === $home->user_id;;
+        return $user->id === $home->user_id;
     }
 
     /**

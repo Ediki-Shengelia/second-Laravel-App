@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreHomeRequest;
+use App\Http\Requests\UpdateHomeRequest;
 use App\Models\Home;
 use Illuminate\Http\Request;
 
@@ -49,7 +50,7 @@ class HomeController extends Controller
     public function show(Home $home)
     {
 
-        $this->authorize('view', $home);
+        // $this->authorize('view', $home);
         return view('home.show', compact('home'));
     }
 
@@ -59,15 +60,22 @@ class HomeController extends Controller
     public function edit(Home $home)
     {
         $this->authorize('update', $home);
-        return view('home.edit');
+
+        $owner = \App\Models\Home::$owner;
+        $types = Home::$type;
+
+        return view('home.edit', compact('home', 'types', 'owner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Home $home)
+    public function update(UpdateHomeRequest $request, Home $home)
     {
         $this->authorize('update', $home);
+        $data = $request->validated();
+        $home->update($data);
+        return redirect()->route('home.show', $home)->with('success', "YOUR post is modified successfully");
     }
 
     /**
@@ -75,8 +83,8 @@ class HomeController extends Controller
      */
     public function destroy(Home $home)
     {
-        $home->delete();
         $this->authorize('delete', $home);
+        $home->delete();
         return redirect()->route('home.index')->with('success', "your post about HOME is deleted");
     }
 }

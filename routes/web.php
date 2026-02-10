@@ -17,6 +17,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/user.photo', [ProfileController::class, 'photo_upload_of_user'])->name('user.photo.upload');
 });
-
 Route::resource('home', \App\Http\Controllers\HomeController::class);
+
 require __DIR__ . '/auth.php';

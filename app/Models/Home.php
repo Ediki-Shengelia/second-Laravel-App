@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Home extends Model
 {
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public static array $type = ['Flat', 'Home', 'Apartment'];
     public static array $owner = ['Owner', 'Broker'];
     protected $fillable = ['location', 'price', 'type', 'phone_number', 'owner', 'area', 'unique_id', 'description', 'home_image', 'user_id'];
