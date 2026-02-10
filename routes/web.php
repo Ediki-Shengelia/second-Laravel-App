@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LikeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,7 +17,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/user.photo', [ProfileController::class, 'photo_upload_of_user'])->name('user.photo.upload');
+    Route::post('like/{home}/add', [LikeController::class, 'toggleLikeFunc'])->name("like");
 });
 Route::resource('home', \App\Http\Controllers\HomeController::class);
+
+
 
 require __DIR__ . '/auth.php';
