@@ -11,7 +11,7 @@ class LikeController extends Controller
     {
         $like = \App\Models\Like::where('user_id', auth()->id())
             ->where('home_id', $home->id)
-            ->fitst();
+            ->first();
         if ($like) {
             $like->delete();
         } else {
@@ -20,7 +20,7 @@ class LikeController extends Controller
                 'home_id' => $home->id
             ]);
             if ($home->user_id !== auth()->id()) {
-                $home->user->notify(new LikeNotification($home));
+            $home->user->notify(new LikeNotification($home));
             }
         }
         return back();

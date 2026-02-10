@@ -49,6 +49,8 @@ class LikeNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
+            'name' => auth()->user()->name,
+            'unique_id' => $this->home->unique_id,
             'message' => auth()->user()->name . "  Liked Your Post"
         ];
     }

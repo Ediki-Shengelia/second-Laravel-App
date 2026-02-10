@@ -22,5 +22,19 @@ Route::middleware('auth')->group(function () {
 Route::resource('home', \App\Http\Controllers\HomeController::class);
 
 
+Route::post('read/{id}', function ($id) {
+    auth()->user()
+        ->notifications
+        ->where('id', $id)
+        ->markAsRead();
+    return back();
+})->name('read.one');
+
+Route::post('read.all', function () {
+    auth()->user()
+        ->unreadNotifications
+        ->markAsRead();
+    return back();
+})->name('read.all');
 
 require __DIR__ . '/auth.php';
