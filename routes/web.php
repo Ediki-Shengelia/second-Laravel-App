@@ -18,6 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/user.photo', [ProfileController::class, 'photo_upload_of_user'])->name('user.photo.upload');
     Route::post('like/{home}/add', [LikeController::class, 'toggleLikeFunc'])->name("like");
+    Route::post('comment/{home}/add', [\App\http\Controllers\CommentController::class, 'commentStore'])->name("comment.store");
+    // Route::get('comment',[\App\http\Controllers\CommentController::class,'index'])->name('comment.index');
 });
 Route::resource('home', \App\Http\Controllers\HomeController::class);
 

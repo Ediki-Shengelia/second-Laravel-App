@@ -25,5 +25,27 @@
 
         </div>
         <div class="text-center text-4xl mt-10">{{ $home->description }}</div>
+
     </a>
+    <div>
+        <span class="text-center text-blue-800 text-2xl">comments </span>
+
+        @forelse($home->comments as $comment)
+            <div class="mt-2 border p-2">
+                {{ $comment->comment }}
+            </div>
+        @empty
+            <p>No comments yet.</p>
+        @endforelse
+    </div>
+    <div class="flex justify-center">
+        <form action="{{ route('comment.store', $home) }}" class="bg-yellow-100 p-4" method="post">
+            @csrf
+            <textarea name="comment" id="" cols="30" rows="2">{{ old('comment') }}</textarea>
+            @error('comment')
+                <p>{{ $message }}</p>
+            @enderror
+            <button class="bg-green-200 px-4 py-1">Add comment</button>
+        </form>
+    </div>
 </x-main-layout>
